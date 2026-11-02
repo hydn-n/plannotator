@@ -460,7 +460,7 @@ describe("plannotator inbox mcp inside an agent session", () => {
       name: "Pi",
     });
     // T3 Code's thread, which outranks the id of the Codex running in it; the Plannotator tag still comes first.
-    const t3 = "f61fb7b2-8564-449f-9ca6-69f9ab87bd3e";
+    const t3 = "00000000-0000-4000-8000-000000000001";
     expect(inboxHostSessionFromEnv({ T3CODE_THREAD_ID: t3, CODEX_THREAD_ID: "019a2b3c-4d5e-7f00-8a9b-0c1d2e3f4a5b" })).toEqual({ host: "t3", session: t3, name: "T3 Code" });
     expect(inboxHostSessionFromEnv({ T3CODE_THREAD_ID: "not-a-uuid" })).toBeNull();
     expect(inboxHostSessionFromEnv({ PLANNOTATOR_SESSION_TAG: "t3:not-a-uuid" })).toBeNull();

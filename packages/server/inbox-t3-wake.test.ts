@@ -15,7 +15,7 @@ import type { InboxThread } from "@plannotator/core/inbox-types";
 import { startInboxServer, type InboxServer } from "./inbox";
 import { INBOX_REPLY_ARRIVES_TEXT, INBOX_REPLY_READ_LATER_TEXT } from "./inbox-mcp";
 
-const THREAD = "f61fb7b2-8564-449f-9ca6-69f9ab87bd3e";
+const THREAD = "00000000-0000-4000-8000-000000000001";
 const ENDPOINT = new URL("http://127.0.0.1:3773/mcp");
 
 const roots: string[] = [];
