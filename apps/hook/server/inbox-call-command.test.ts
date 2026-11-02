@@ -29,7 +29,7 @@ const entry = resolve(import.meta.dir, "index.ts");
 const HOUR = 60 * 60_000;
 const CODEX_THREAD = "019a2b3c-4d5e-7f00-8a9b-0c1d2e3f4a5b";
 const QWEN_SESSION = "11111111-2222-4333-8444-555555555555";
-const T3_THREAD = "f61fb7b2-8564-449f-9ca6-69f9ab87bd3e";
+const T3_THREAD = "00000000-0000-4000-8000-000000000001";
 
 let stubs: string[] = [];
 const roots: string[] = [];
