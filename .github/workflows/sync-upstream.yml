@@ -1,0 +1,30 @@
+# Fork-only (hydn-n/plannotator): keeps main merged with backnotprop/plannotator main.
+# A conflict fails the run (GitHub emails you); merge by hand, then re-run.
+# FORK_SYNC_TOKEN: fine-grained PAT on this repo only, Contents + Workflows + Actions write.
+# The default GITHUB_TOKEN cannot push upstream's .github/workflows changes, and its pushes would not trigger Test.
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  sync:
+    if: github.repository == 'hydn-n/plannotator'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.FORK_SYNC_TOKEN }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Merge upstream main
+        run: gh api -X POST "repos/$REPO/merge-upstream" -f branch=main
+      # Upstream workflows deploy, release and scan; only this one and Test run in the fork.
+      - name: Keep upstream workflows off
+        run: |
+          gh workflow list -R "$REPO" --json path,state \
+            --jq '.[] | select(.state == "active") | .path | split("/") | last' |
+            grep -vxE 'sync-upstream\.yml|test\.yml' |
+            xargs -r -n1 gh workflow disable -R "$REPO"
